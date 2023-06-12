@@ -1,0 +1,17 @@
+{
+  "name": "template-react-express",
+  "version": "1.0",
+  "description": "Template for React and Express app.",
+  "author": "freely.digital",
+  "license": "Proprietary software",
+  "private": true,
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  },
+  "scripts": {
+    "frontend": "(cd ./packages/frontend && yarn run start)",
+    "backend": "(cd ./packages/backend && yarn nodemon app)",
+    "server": "concurrently \"yarn run frontend\" \"yarn run backend\""
+  },
+  "packageManager": "yarn@3.5.0"
+}
