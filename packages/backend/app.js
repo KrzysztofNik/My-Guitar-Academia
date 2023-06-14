@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+require('dotenv').config();
+
 const knex = require('./knex');
 const utils = require('./utils');
 
