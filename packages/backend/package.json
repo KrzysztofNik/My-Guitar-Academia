@@ -7,6 +7,7 @@
   "private": true,
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-generator": "^4.16.1",
     "knex": "^2.4.2",

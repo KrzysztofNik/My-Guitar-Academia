@@ -9,6 +9,6 @@ exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('users').del()
     await knex('users').insert([
-        { id: 1, email: 'adam@overment.com', password: bcrypt.hashSync('12345',8) }
+        { id: 1,Name: 'Adam',Surname:'Guo', Email: 'adam@overment.com', password: bcrypt.hashSync('12345',8) }
   ]);
 };
