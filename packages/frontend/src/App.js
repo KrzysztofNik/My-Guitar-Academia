@@ -1,15 +1,17 @@
 import './App.css';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 function App() {
- return (
-      <nav className=''>
+    return (
+      <nav>
           <h4>Main page</h4>
           <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/register">Register</a></li>
+              <li><Link to='/'>Home</Link></li>
+              <li><Link to='/login'>Login</Link></li>
+              <li><Link to="/register">Register</Link></li>
           </ul>
-      </nav>
+     </nav>
   );
 }
 export default App;
