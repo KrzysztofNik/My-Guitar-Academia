@@ -10,7 +10,6 @@ function RegistrationForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Tworzenie obiektu z danymi formularza
         const formData = {
             Name: Name,
             Surname: Surname,
@@ -19,7 +18,7 @@ function RegistrationForm() {
         };
 
 
-        axios.post('http://localhost:8000/', formData)
+        axios.post('http://localhost:8000/auth/register', formData)
             .then(response => {
                 console.log(response);
             })

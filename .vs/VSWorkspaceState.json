@@ -3,10 +3,11 @@
     "",
     "\\packages",
     "\\packages\\backend",
-    "\\packages\\backend\\models",
+    "\\packages\\backend\\database",
+    "\\packages\\backend\\database\\seeds",
     "\\packages\\frontend",
     "\\packages\\frontend\\src"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\packages\\frontend\\src\\Register.js",
   "PreviewInSolutionExplorer": false
 }
