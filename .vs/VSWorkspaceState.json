@@ -2,12 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\packages",
-    "\\packages\\backend",
-    "\\packages\\backend\\database",
-    "\\packages\\backend\\database\\seeds",
-    "\\packages\\frontend",
-    "\\packages\\frontend\\src"
+    "\\packages\\frontend"
   ],
-  "SelectedNode": "\\packages\\frontend\\src\\Register.js",
+  "SelectedNode": "\\packages\\backend",
   "PreviewInSolutionExplorer": false
 }

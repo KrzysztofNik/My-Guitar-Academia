@@ -2,29 +2,29 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('./models/User');
+const cookieParser = require('cookie-parser');
 
 
 const generateTokens = async (req, res, user, onlyAccessToken = false) => {
     try {
-        const payload = { id: user.id, Email: user.Email };
+        const payload = { id: user.id, email: user.email };
 
         const accessToken = jwt.sign(
             payload,
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '30m'}
         );
-        const refreshToken = !onlyAccessToken ? jwt.sign(
+        const refreshToken =  !onlyAccessToken ? jwt.sign(
             payload,
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '480m' }
         ) : null;
-
-        await User.query().findOne({ Email: user.Email }).patch({ refreshToken });
+        await User.query().findOne({ email: user.email }).patch({ refreshToken });
 
         await res.cookie('accessToken', accessToken, {
             httpOnly: true,
             secure: true,
-            sameSite: 'strict',
+            sameSite: 'none',
             maxAge:  30 * 60 * 1000
         });
 
@@ -32,7 +32,7 @@ const generateTokens = async (req, res, user, onlyAccessToken = false) => {
             await res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'strict',
+                sameSite: 'none',
                 maxAge: 480  * 60 * 1000
             });
         }
@@ -44,7 +44,6 @@ const generateTokens = async (req, res, user, onlyAccessToken = false) => {
 const getTokens = async (req) => {
     const accessToken = req.cookies.accessToken;
     const refreshToken = req.cookies.refreshToken;
-
     if (accessToken || refreshToken) {
         return { accessToken, refreshToken };
     }
@@ -54,27 +53,23 @@ const getTokens = async (req) => {
 
 const getUser = async (req, res, next) => {
     const authTokens = await getTokens(req);
-
     if (!authTokens) {
         return { user: null, authTokens: null };
     }
-
     try {
-        jwt.verify(authTokens.accessToken, process.env.ACCESS_TOKEN_SECRET);
-        const user = await User.query().findById(authTokens.Id);
-
+        const decodedTokenA = jwt.verify(authTokens.accessToken, process.env.ACCESS_TOKEN_SECRET);
+        const user = await User.query().findById(decodedTokenA.id);
         if (!user) {
             throw new Error('Provided user in token payload is invalid or not found.');
         }
 
-        req.user = user;
+        return { user, authTokens };
 
-        next();
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
             try {
-                jwt.verify(authTokens.refreshToken, process.env.REFRESH_TOKEN_SECRET);
-                const user = await User.query().findById(authTokens.userId);
+                decodedTokenR = jwt.verify(authTokens.refreshToken, process.env.REFRESH_TOKEN_SECRET);
+                const user = await User.query().findById(decodedTokenR.id);
 
                 await generateTokens(req, res, user, true);
 
@@ -88,9 +83,9 @@ const getUser = async (req, res, next) => {
 };
 
 
-const login = async(Email, password,req,res) => {
+const login = async(email,password,req,res) => {
     try {
-        const user = await User.query().findOne({ Email: Email });
+        const user = await User.query().findOne({ email: email });
         if (!user) {
             return { error: 'Nieprawidlowy email lub haslo' };
         }
@@ -109,9 +104,9 @@ const login = async(Email, password,req,res) => {
 
 const register = async (req,res) => {
     try {
-        let { Name, Surname, Email, password } = req.body;
+        let { name, surname, email, password } = req.body;
         password = bcrypt.hashSync(password, 8);
-        await User.query().insert({ Name, Surname, Email, password });
+        await User.query().insert({ name, surname, email, password });
         return res.status(200).json({ message: 'U¿ytkownik zarejestrowany pomyslnie' });
     }
     catch (error) {
@@ -120,4 +115,25 @@ const register = async (req,res) => {
     }
 }
 
-module.exports = { generateTokens, getUser, login, register }
+const logout = async (req, res) => {
+
+    const authTokens = await getTokens(req);
+
+    if (!authTokens) {
+        return res.status(401).json({ error: 'U¿ytkownik niezalogowany' });
+    }
+
+    try {
+        const userId = req.user?.id ?? null;
+        await User.query().findById(userId).patch({ refreshToken: null });
+        res.clearCookie('accessToken');
+        res.clearCookie('refreshToken');
+        res.redirect('/');
+    }
+    catch (error){ 
+        console.error('B³¹d podczas wylogowania u¿ytkownika:', error);
+        return res.status(500).json({ error: 'Wyst¹pi³ b³¹d podczas wylogowania u¿ytkownika.' });
+    }
+}
+
+module.exports = { generateTokens, getUser, login, register, logout }

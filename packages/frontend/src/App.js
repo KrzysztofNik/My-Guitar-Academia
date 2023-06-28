@@ -10,6 +10,7 @@ function App() {
               <li><Link to='/'>Home</Link></li>
               <li><Link to='/auth/login'>Login</Link></li>
               <li><Link to="/auth/register">Register</Link></li>
+              <li><Link to="/guitar/add">Dodaj gitare</Link></li>
           </ul>
      </nav>
   );

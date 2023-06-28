@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function RegistrationForm() {
-    const [Name, setname] = useState('');
-    const [Surname, setsurname] = useState('');
+    const [name, setname] = useState('');
+    const [surname, setsurname] = useState('');
     const [password, setPassword] = useState('');
-    const [Email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = {
-            Name: Name,
-            Surname: Surname,
+            name: name,
+            surname: surname,
             password: password,
-            Email: Email
+            email: email
         };
 
 
@@ -34,13 +34,13 @@ function RegistrationForm() {
                 <input
                     type="text"
                     placeholder="Imie"
-                    value={Name}
+                    value={name}
                     onChange={(e) => setname(e.target.value)}
                 />
                 <input
                     type="text"
                     placeholder="Nazwisko"
-                    value={Surname}
+                    value={surname}
                     onChange={(e) => setsurname(e.target.value)}
                 />
                 <input
@@ -52,7 +52,7 @@ function RegistrationForm() {
                 <input
                     type="email"
                     placeholder="Adres e-mail"
-                    value={Email}
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <button type="submit">Zarejestruj</button>

@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import Register from './Register'
 import Login from './Login'
+import Logout from './Logout'
+import AddGuitar from './AddGuitar'
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter,Routes,Route} from 'react-router-dom';
+import { BrowserRouter,Routes,Route,} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +17,8 @@ root.render(
                 <Route path='/' element={<App />} />
                 <Route path='/auth/login' element={<Login />} />
                 <Route path='/auth/register' element={<Register />} />
+                <Route path='/auth/logout' element={<Logout />} />
+                <Route path='/guitar/add' element={<AddGuitar />} />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

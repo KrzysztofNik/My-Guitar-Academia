@@ -3,17 +3,17 @@ import './Login.css';
 import axios from 'axios';
 
 function LoginForm() {
-    const [Email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setpassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = {
-            Email: Email,
+            email: email,
             password: password
         };
-        axios.post('http://localhost:8000/auth/login', formData)
+        axios.post('http://localhost:8000/auth/login', formData, {withCredentials: true})
             .then(response => {
                 console.log(response);
             })
@@ -30,7 +30,7 @@ function LoginForm() {
                         <input
                             type="email"
                             placeholder="Adres e-mail"
-                            value={Email}
+                            value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <input
