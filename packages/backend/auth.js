@@ -118,14 +118,13 @@ const register = async (req,res) => {
 const logout = async (req, res) => {
 
     const authTokens = await getTokens(req);
-
     if (!authTokens) {
         return res.status(401).json({ error: 'U¿ytkownik niezalogowany' });
     }
 
     try {
-        const userId = req.user?.id ?? null;
-        await User.query().findById(userId).patch({ refreshToken: null });
+        const decodedTokenA = jwt.verify(authTokens.accessToken, process.env.ACCESS_TOKEN_SECRET);
+        await User.query().findById(decodedTokenA.id).patch({ refreshToken: null });
         res.clearCookie('accessToken');
         res.clearCookie('refreshToken');
         res.redirect('/');
@@ -135,5 +134,6 @@ const logout = async (req, res) => {
         return res.status(500).json({ error: 'Wyst¹pi³ b³¹d podczas wylogowania u¿ytkownika.' });
     }
 }
+
 
 module.exports = { generateTokens, getUser, login, register, logout }

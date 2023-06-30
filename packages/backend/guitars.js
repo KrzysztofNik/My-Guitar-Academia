@@ -9,7 +9,6 @@ const addGuitar = async (req, res) => {
     if (!user) {
         return res.status(401).json({ error: 'U¿ytkownik niezalogowany' });
     }
-    console.log(3);
     try {
         let { id, guitarImage, guitarName, guitarModel, bought, year, price, stringChange, stringsProducer, stringThickness, lastCleaning } = req.body;
         let ownerId = user.id;
@@ -23,4 +22,23 @@ const addGuitar = async (req, res) => {
 
 }
 
-module.exports = { addGuitar }
+const showGuitars = async (req, res) => {
+    const { user } = await getUser(req, res, () => { });
+
+    if (!user) {
+        return res.status(401).json({ error: 'U¿ytkownik niezalogowany' });
+    }
+
+    try {
+        const guitars = await Guitar.query().where('ownerId',user.id);
+        return res.json(guitars);
+
+    } catch (error) {
+        console.error('B³¹d przy wyci¹ganiu gitar', error)
+        return res.status(500).json({ error: 'Wyst¹pi³ b³¹d podczas wyci¹gania gitar z bazy danych' })
+    }
+
+}
+
+
+module.exports = { addGuitar, showGuitars }

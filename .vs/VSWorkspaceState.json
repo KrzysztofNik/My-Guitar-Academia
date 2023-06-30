@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\packages",
-    "\\packages\\frontend"
+    "\\packages\\backend",
+    "\\packages\\backend\\database",
+    "\\packages\\backend\\database\\migrations",
+    "\\packages\\frontend",
+    "\\packages\\frontend\\src"
   ],
-  "SelectedNode": "\\packages\\backend",
   "PreviewInSolutionExplorer": false
 }
