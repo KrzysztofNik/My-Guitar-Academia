@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setpassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,9 +19,11 @@ function LoginForm() {
         axios.post('http://localhost:8000/auth/login', formData, {withCredentials: true})
             .then(response => {
                 console.log(response);
+                navigate('/');
             })
             .catch(error => {
                 console.error('Blad logowania', error);
+                setErrorMessage('Nieprawidlowy login lub haslo.');
             });
     };
     return (
@@ -41,6 +46,7 @@ function LoginForm() {
                         />
                         <button type="submit">Zaloguj</button>
                     </form>
+                    {errorMessage && <p className="ErrorMessage">{errorMessage}</p>}
                 </div>
             </div>
         </div>

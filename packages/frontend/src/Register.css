@@ -1,0 +1,39 @@
+.RegistrationForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+    .RegistrationForm h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    .RegistrationForm form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+.RegistrationFormInput {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    width: 300px; /* Dodano szerokoœæ do inputów */
+}
+
+.RegistrationFormButton {
+    padding: 12px 30px;
+    font-size: 16px;
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 200px; /* Dodano szerokoœæ do przycisku */
+}
+
+    .RegistrationFormButton:hover {
+        background-color: #3367d6;
+    }

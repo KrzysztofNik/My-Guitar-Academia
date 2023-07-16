@@ -1,8 +1,8 @@
 .Login {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100vh;
 }
 
@@ -10,18 +10,15 @@
     margin-bottom: 20px;
     font-size: 24px;
 }
+
 .LoginFormContainer {
-    background-color: green;
-    padding: 20px;
-    width: 300px;
-    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .MiddleSection {
-    background-color: black;
-    color: #fff;
-    padding: 40px;
-    text-align: center;
+    width: 300px;
 }
 
 .LoginForm {
@@ -30,13 +27,20 @@
 }
 
     .LoginForm input {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         padding: 10px;
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .LoginForm button {
-        margin-top: 10px;
         padding: 10px 20px;
-        font-size: 18px;
+        font-size: 16px;
+        background-color: #4285f4;
+        color: #fff;
+        border: none;
+        cursor: pointer;
     }
+
+        .LoginForm button:hover {
+            background-color: #3367d6;
+        }

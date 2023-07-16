@@ -3,8 +3,6 @@
     "",
     "\\packages",
     "\\packages\\backend",
-    "\\packages\\backend\\database",
-    "\\packages\\backend\\database\\migrations",
     "\\packages\\frontend",
     "\\packages\\frontend\\src"
   ],

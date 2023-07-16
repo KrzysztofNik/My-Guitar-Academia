@@ -127,7 +127,7 @@ const logout = async (req, res) => {
         await User.query().findById(decodedTokenA.id).patch({ refreshToken: null });
         res.clearCookie('accessToken');
         res.clearCookie('refreshToken');
-        res.redirect('/');
+        return res.status(200).json({ message: 'U¿ytkownik wylogowany pomyœlnie' });
     }
     catch (error){ 
         console.error('B³¹d podczas wylogowania u¿ytkownika:', error);

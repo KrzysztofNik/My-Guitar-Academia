@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function GuitarAddForm() {
     const [guitarName, setname] = useState('');
@@ -12,6 +13,7 @@ function GuitarAddForm() {
     const [stringProducer, setproducer] = useState('');
     const [stringThickness, setthickness] = useState('');
     const [lastCleaning, setcleaning] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,6 +35,7 @@ function GuitarAddForm() {
         axios.post('http://localhost:8000/guitar/add', formData, {withCredentials:true})
             .then(response => {
                 console.log(response);
+                navigate('/');
             })
             .catch(error => {
                 console.error('B³¹d:', error);

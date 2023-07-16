@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link,redirect } from 'react-router-dom'
 import axios from "axios"
 
 
@@ -27,6 +27,18 @@ function App() {
             console.error(error);
         }
     };
+    const handleLogout = () => {
+      
+        axios.get('http://localhost:8000/auth/logout', { withCredentials: true })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.error('B³¹d:', error);
+            });
+        setIsLoggedIn(false);
+    };
+
 
     useEffect(() => {
         fetchGitary();
@@ -40,7 +52,7 @@ function App() {
                 <li><Link to='/'>Home</Link></li>
                 {isLoggedIn ? (
                     <>
-                        <li><Link to='/logout'>Logout</Link></li>
+                        <li><button onClick={handleLogout}>Logout</button></li>
                     </>
                 ) : (
                     <>
@@ -52,15 +64,16 @@ function App() {
                     <li><Link to='/guitar/add'>Dodaj gitare</Link></li>
                 }
             </ul>
-
-            <div>
-                <h2>Wszystkie gitary</h2>
-                <ul>
-                    {userGuitars.map((gitara) => (
-                        <li key={gitara.id}>{gitara.guitarName}</li>
-                    ))}
-                </ul>
-            </div>
+            {isLoggedIn &&
+                <div>
+                    <h2>Wszystkie gitary</h2>
+                    <ul>
+                        {userGuitars.map((gitara) => (
+                            <li key={gitara.id}>{gitara.guitarName}</li>
+                        ))}
+                    </ul>
+                </div>
+            }
         </nav>
     );
 }
