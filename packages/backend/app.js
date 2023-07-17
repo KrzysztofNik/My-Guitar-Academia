@@ -15,7 +15,7 @@ Model.knex(knex);
 app.use('/storage', express.static('storage/public'));
 app.use(bodyParser.json());
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:8000'],
+    origin: ['http://localhost:3000'],
     credentials: true
 };
 app.use(cors(corsOptions));

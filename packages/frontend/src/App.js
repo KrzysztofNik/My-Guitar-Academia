@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react'
-import { Link,redirect } from 'react-router-dom'
 import axios from "axios"
+import Navbar from './Navbar'
 
 
 
@@ -27,17 +27,6 @@ function App() {
             console.error(error);
         }
     };
-    const handleLogout = () => {
-      
-        axios.get('http://localhost:8000/auth/logout', { withCredentials: true })
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.error('B³¹d:', error);
-            });
-        setIsLoggedIn(false);
-    };
 
 
     useEffect(() => {
@@ -45,31 +34,21 @@ function App() {
         checkLoggedIn();
     }, []);
 
+
     return (
         <nav>
-            <h4>Main page</h4>
-            <ul>
-                <li><Link to='/'>Home</Link></li>
-                {isLoggedIn ? (
-                    <>
-                        <li><button onClick={handleLogout}>Logout</button></li>
-                    </>
-                ) : (
-                    <>
-                        <li><Link to='/auth/login'>Login</Link></li>
-                        <li><Link to='/auth/register'>Register</Link></li>
-                    </>
-                )}
-                {isLoggedIn && 
-                    <li><Link to='/guitar/add'>Dodaj gitare</Link></li>
-                }
-            </ul>
+            <Navbar/>
             {isLoggedIn &&
                 <div>
                     <h2>Wszystkie gitary</h2>
                     <ul>
                         {userGuitars.map((gitara) => (
-                            <li key={gitara.id}>{gitara.guitarName}</li>
+                            <li key={gitara.id}>
+                                <ul>
+                                    {gitara.guitarName && <li>{gitara.guitarName}</li>}
+                                    {gitara.guitarModel && <li>{gitara.guitarModel}</li>}
+                               </ul>
+                            </li>
                         ))}
                     </ul>
                 </div>

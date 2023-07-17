@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function GuitarAddForm() {
     const [guitarName, setname] = useState('');
-    const [guitarImage, setimage] = useState('');
+    const [guitarImage, setimage] = useState(null);
     const [guitarModel, setmodel] = useState('');
     const [bought, setbought] = useState('');
     const [year, setyear] = useState('');
@@ -59,8 +59,7 @@ function GuitarAddForm() {
                     Guitar Image:
                     <input
                         type="file"
-                        value={guitarImage}
-                        onChange={(e) => setimage(e.target.value)}
+                        onChange={(e) => setimage(e.target.files[0])}
                     />
                 </label>
                 <br />
