@@ -2,12 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\packages",
-    "\\packages\\backend",
-    "\\packages\\backend\\database",
-    "\\packages\\backend\\database\\migrations",
     "\\packages\\frontend",
     "\\packages\\frontend\\src"
   ],
-  "SelectedNode": "\\packages\\backend\\database\\migrations\\20230626135259_create_guitars_table.js",
   "PreviewInSolutionExplorer": false
 }

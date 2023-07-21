@@ -1,38 +1,25 @@
-.App {
-  text-align: center;
+body {
+    background-color: rgba(51, 51, 51, 0.85);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.guitars-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.guitar-card {
+    width: calc(45vw - 10px); 
+    margin: 20px 30px;
+    padding: 15px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    background-color: rgba(192, 192, 192, 0.5);
+    color: black;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+    .guitar-card:hover {
+        transform: scale(1.05);
+    }

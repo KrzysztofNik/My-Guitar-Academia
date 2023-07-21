@@ -7,6 +7,7 @@ import Login from './Login'
 import AddGuitar from './AddGuitar'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter,Routes,Route,} from 'react-router-dom';
+import GuitarDetail from './GuitarDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
                 <Route path='/auth/login' element={<Login />} />
                 <Route path='/auth/register' element={<Register />} />
                 <Route path='/guitar/add' element={<AddGuitar />} />
+                <Route path='/guitar/:userId/:guitarId' element={ <GuitarDetail/> } />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>

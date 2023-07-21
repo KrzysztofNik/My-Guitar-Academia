@@ -2,7 +2,7 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import Navbar from './Navbar'
-
+import { Link } from "react-router-dom";
 
 
 function App() {
@@ -37,23 +37,21 @@ function App() {
 
     return (
         <nav>
-            <Navbar/>
+            <Navbar />
             {isLoggedIn &&
-                <div>
-                    <h2>Wszystkie gitary</h2>
-                    <ul>
-                        {userGuitars.map((gitara) => (
-                            <li key={gitara.id}>
-                                <ul>
-                                    {gitara.guitarName && <li>{gitara.guitarName}</li>}
-                                    {gitara.guitarModel && <li>{gitara.guitarModel}</li>}
-                               </ul>
-                            </li>
-                        ))}
-                    </ul>
+                <div className="guitars-container">
+                    {userGuitars.map((gitara) => (
+                        <Link to={`/guitar/${gitara.ownerId}/${gitara.id}`} key={gitara.id}>
+                            <div className="guitar-card">
+                                <div className="guitar-name">{gitara.guitarName}</div>
+                                <div className="guitar-model">{gitara.guitarModel}</div>
+                            </div>
+                        </Link>
+                    ))}
                 </div>
             }
         </nav>
     );
 }
 export default App;
+

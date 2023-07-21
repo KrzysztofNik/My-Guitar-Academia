@@ -30,7 +30,7 @@ const showGuitars = async (req, res) => {
     }
 
     try {
-        const guitars = await Guitar.query().where('ownerId',user.id);
+        const guitars = await Guitar.query().where('ownerId', user.id);
         return res.json(guitars);
 
     } catch (error) {

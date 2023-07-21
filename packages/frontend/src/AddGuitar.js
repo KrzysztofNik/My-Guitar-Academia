@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import './AddGuitar.css';
 
 function GuitarAddForm() {
-    const [guitarName, setname] = useState('');
+    const [guitarName, setname] = useState(null);
     const [guitarImage, setimage] = useState(null);
-    const [guitarModel, setmodel] = useState('');
-    const [bought, setbought] = useState('');
-    const [year, setyear] = useState('');
-    const [price, setprice] = useState('');
-    const [stringChange, setchange] = useState('');
-    const [stringProducer, setproducer] = useState('');
-    const [stringThickness, setthickness] = useState('');
-    const [lastCleaning, setcleaning] = useState('');
+    const [guitarModel, setmodel] = useState(null);
+    const [bought, setbought] = useState(null);
+    const [year, setyear] = useState(null);
+    const [price, setprice] = useState(null);
+    const [stringChange, setchange] = useState(null);
+    const [stringProducer, setproducer] = useState(null);
+    const [stringThickness, setthickness] = useState(null);
+    const [lastCleaning, setcleaning] = useState(null);
     const navigate = useNavigate();
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,7 +35,7 @@ function GuitarAddForm() {
         };
 
 
-        axios.post('http://localhost:8000/guitar/add', formData, {withCredentials:true})
+        axios.post('http://localhost:8000/guitar/add', formData, { withCredentials: true })
             .then(response => {
                 console.log(response);
                 navigate('/');
@@ -43,7 +46,7 @@ function GuitarAddForm() {
     };
 
     return (
-        <div>
+        <div className='form-container' >
             <h2>Formularz dodawanaia gitar</h2>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -59,7 +62,8 @@ function GuitarAddForm() {
                     Guitar Image:
                     <input
                         type="file"
-                        onChange={(e) => setimage(e.target.files[0])}
+                        value={guitarImage}
+                        onChange={(e) => setimage(e.target.value)}
                     />
                 </label>
                 <br />
