@@ -6,7 +6,8 @@ const cors = require('cors');
 const knex = require('./knex');
 const routesAuth = require('./routesAuth');
 const routesGuitar = require('./routesGuitars');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const multer = require('multer');
 
 require('dotenv').config();
 
@@ -18,6 +19,9 @@ const corsOptions = {
     origin: ['http://localhost:3000'],
     credentials: true
 };
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+app.use(upload.single('guitarImage'));
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use('/auth', routesAuth);

@@ -4,40 +4,54 @@ import { useNavigate } from "react-router-dom";
 import './AddGuitar.css';
 
 function GuitarAddForm() {
-    const [guitarName, setname] = useState(null);
-    const [guitarImage, setimage] = useState(null);
-    const [guitarModel, setmodel] = useState(null);
-    const [bought, setbought] = useState(null);
-    const [year, setyear] = useState(null);
-    const [price, setprice] = useState(null);
-    const [stringChange, setchange] = useState(null);
-    const [stringProducer, setproducer] = useState(null);
-    const [stringThickness, setthickness] = useState(null);
-    const [lastCleaning, setcleaning] = useState(null);
+    const [guitarName, setname] = useState("");
+    const [selectedImage, setSelectedImage] = useState("");
+    const [previewImage, setPreviewImage] = useState("");
+    const [guitarModel, setmodel] = useState("");
+    const [bought, setbought] = useState("");
+    const [year, setyear] = useState("");
+    const [price, setprice] = useState("");
+    const [stringChange, setchange] = useState("");
+    const [stringProducer, setproducer] = useState("");
+    const [stringThickness, setthickness] = useState("");
+    const [lastCleaning, setcleaning] = useState("");
     const navigate = useNavigate();
 
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedImage(file);
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setPreviewImage(reader.result);
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const formData = {
-            guitarName: guitarName,
-            guitarImage: guitarImage,
-            guitarModel: guitarModel,
-            bought: bought,
-            year: year,
-            price: price,
-            stringChange: stringChange,
-            stringProducer: stringProducer,
-            stringThickness: stringThickness,
-            lastCleaning: lastCleaning
-        };
+        const formData = new FormData();
+        formData.append('guitarName', guitarName);
+        formData.append('guitarImage', selectedImage);
+        formData.append('guitarModel', guitarModel);
+        formData.append('bought', bought);
+        formData.append('year', year);
+        formData.append('price', price);
+        formData.append('stringChange', stringChange);
+        formData.append('stringProducer', stringProducer);
+        formData.append('stringThickness', stringThickness);
+        formData.append('lastCleaning', lastCleaning);
 
 
-        axios.post('http://localhost:8000/guitar/add', formData, { withCredentials: true })
+
+        axios.post('http://localhost:8000/guitar/add', formData, { withCredentials: true, })
             .then(response => {
-                console.log(response);
+;                console.log(response);
                 navigate('/');
             })
             .catch(error => {
@@ -62,9 +76,16 @@ function GuitarAddForm() {
                     Guitar Image:
                     <input
                         type="file"
-                        value={guitarImage}
-                        onChange={(e) => setimage(e.target.value)}
+                        onChange={handleImageChange}
+                        accept='image/*'
                     />
+                    {previewImage && (
+                        <img
+                            src={previewImage}
+                            alt="Preview"
+                            style={{ maxWidth: "200px", maxHeight: "200px" }}
+                        />
+                    )}
                 </label>
                 <br />
                 <label>

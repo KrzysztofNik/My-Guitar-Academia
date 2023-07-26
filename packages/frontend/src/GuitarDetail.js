@@ -46,9 +46,12 @@ function GuitarDetail() {
                 <div style={styles.container}>
                     <h1>{details.guitarName}</h1>
                     {details.guitarModel && <p>Model: {details.guitarModel}</p>}
+                    {details.guitarImage && (
+                        <img src={`http://localhost:8000/guitar/image/${guitarId}`} alt="Guitar" style={{ maxWidth: '400px' }} />
+                    )}
                     {details.bought && <p>Bought: {dateFormat(details.bought)}</p>}
                     {details.year && <p>Year: {dateFormat(details.year)}</p>}
-                    {details.price && <p>Price: {details.price}</p>}
+                    {details.price && <p>Price: {details.price}zl</p>}
                     {details.stringChange && <p>String Change: {dateFormat(details.stringChange)}</p>}
                     {details.stringChange && <p>String Change: {daysFromDate(details.stringChange)}</p>}
                     {details.stringProducer && <p>String Producer: {details.stringProducer}</p>}
