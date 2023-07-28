@@ -5,6 +5,7 @@ import App from './App';
 import Register from './Register'
 import Login from './Login'
 import AddGuitar from './AddGuitar'
+import EditGuitar from './EditGuitar'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter,Routes,Route,} from 'react-router-dom';
 import GuitarDetail from './GuitarDetail';
@@ -18,6 +19,7 @@ root.render(
                 <Route path='/auth/login' element={<Login />} />
                 <Route path='/auth/register' element={<Register />} />
                 <Route path='/guitar/add' element={<AddGuitar />} />
+                <Route path='/guitar/:userId/:guitarId/edit' element={<EditGuitar />} />
                 <Route path='/guitar/:userId/:guitarId' element={ <GuitarDetail/> } />
             </Routes>
         </BrowserRouter>

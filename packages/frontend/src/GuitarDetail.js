@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Navbar from './Navbar'
 
 function GuitarDetail() {
-	const [userGuitars, setUserGuitars] = useState([]);
+    const [userGuitar, setUserGuitar] = useState([]);
     let { guitarId } = useParams();
 
     function dateFormat(date) {
@@ -26,7 +26,8 @@ function GuitarDetail() {
         try {
             const response = await axios.get('http://localhost:8000/guitar/show', { withCredentials: true });
             const data = response.data;
-            setUserGuitars(data);
+            const details = data.find((guitar) => guitar.id === parseInt(guitarId));
+            setUserGuitar(details);
         } catch (error) {
             console.error(error);
         }
@@ -34,32 +35,31 @@ function GuitarDetail() {
 
     useEffect(() => {
         fetchGitary();
-    }, []);
+    });
 
-
-    const details = userGuitars.find((guitar) => guitar.id === parseInt(guitarId));
 
     return (
         <div>
             <Navbar />
-            {details && (
+            {userGuitar && (
                 <div style={styles.container}>
-                    <h1>{details.guitarName}</h1>
-                    {details.guitarModel && <p>Model: {details.guitarModel}</p>}
-                    {details.guitarImage && (
+                    <h1>{userGuitar.guitarName}</h1>
+                    {userGuitar.guitarModel && <p>Model: {userGuitar.guitarModel}</p>}
+                    {userGuitar.guitarImage && (
                         <img src={`http://localhost:8000/guitar/image/${guitarId}`} alt="Guitar" style={{ maxWidth: '400px' }} />
                     )}
-                    {details.bought && <p>Bought: {dateFormat(details.bought)}</p>}
-                    {details.year && <p>Year: {dateFormat(details.year)}</p>}
-                    {details.price && <p>Price: {details.price}zl</p>}
-                    {details.stringChange && <p>String Change: {dateFormat(details.stringChange)}</p>}
-                    {details.stringChange && <p>String Change: {daysFromDate(details.stringChange)}</p>}
-                    {details.stringProducer && <p>String Producer: {details.stringProducer}</p>}
-                    {details.stringThickness && <p>String Thickness: {details.stringThickness}</p>}
-                    {details.lastCleaning && <p>Last Cleaning: {dateFormat(details.lastCleaning)}</p>}
-                    {details.lastCleaning && <p>Last Cleaning: {daysFromDate(details.lastCleaning)}</p>}
+                    {userGuitar.bought && <p>Bought: {dateFormat(userGuitar.bought)}</p>}
+                    {userGuitar.year && <p>Year: {dateFormat(userGuitar.year)}</p>}
+                    {userGuitar.price && <p>Price: {userGuitar.price}zl</p>}
+                    {userGuitar.stringChange && <p>String Change: {dateFormat(userGuitar.stringChange)}</p>}
+                    {userGuitar.stringChange && <p>String Change: {daysFromDate(userGuitar.stringChange)}</p>}
+                    {userGuitar.stringProducer && <p>String Producer: {userGuitar.stringProducer}</p>}
+                    {userGuitar.stringThickness && <p>String Thickness: {userGuitar.stringThickness}</p>}
+                    {userGuitar.lastCleaning && <p>Last Cleaning: {dateFormat(userGuitar.lastCleaning)}</p>}
+                    {userGuitar.lastCleaning && <p>Last Cleaning: {daysFromDate(userGuitar.lastCleaning)}</p>}
                 </div>
             )}
+            <Link to={`/guitar/${userGuitar.ownerId}/${guitarId}/edit`} key={userGuitar.ownerId}><button>Edit</button></Link>
         </div>
     );
 
