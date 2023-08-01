@@ -13,7 +13,12 @@ function GuitarAddForm() {
     const [price, setprice] = useState("");
     const [stringChange, setchange] = useState("");
     const [stringProducer, setproducer] = useState("");
-    const [stringThickness, setthickness] = useState("");
+    const [ThicknessE, setE] = useState("");
+    const [ThicknessA, setA] = useState("");
+    const [ThicknessD, setD] = useState("");
+    const [ThicknessG, setG] = useState("");
+    const [ThicknessB, setB] = useState("");
+    const [Thicknesse, sete] = useState("");
     const [lastCleaning, setcleaning] = useState("");
     const navigate = useNavigate();
 
@@ -32,8 +37,22 @@ function GuitarAddForm() {
     };
 
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+
+        let stringThickness = ThicknessE + " " + ThicknessA + " " + ThicknessD + " " + ThicknessG + " " + ThicknessB + " " + Thicknesse;
+        if (stringThickness.trim().length === 0) {
+            stringThickness = "";
+        }
+        else if (ThicknessE !== "" && ThicknessA !== "" && ThicknessD !== "" && ThicknessG !== "" && ThicknessB !== "" && Thicknesse !== "") {
+
+        }
+        else {
+            alert('Put all string thickness values or none');
+            return;
+        }
 
         const formData = new FormData();
         formData.append('guitarName', guitarName);
@@ -118,7 +137,9 @@ function GuitarAddForm() {
                 <label>
                     Price:
                     <input
-                        type="text"
+                        type="number"
+                        min='0'
+                        step='0.01'
                         value={price}
                         onChange={(e) => setprice(e.target.value)}
                     />
@@ -143,11 +164,56 @@ function GuitarAddForm() {
                 </label>
                 <br />
                 <label>
-                    String Thickness:
+                    String E Thickness:
                     <input
                         type="text"
-                        value={stringThickness}
-                        onChange={(e) => setthickness(e.target.value)}
+                        value={ThicknessE}
+                        onChange={(e) => setE(e.target.value)}
+                    />
+                </label>
+                <br />
+                <label>
+                    String A Thickness:
+                    <input
+                        type="text"
+                        value={ThicknessA}
+                        onChange={(e) => setA(e.target.value)}
+                    />
+                </label>
+                <br />
+                <label>
+                    String D Thickness:
+                    <input
+                        type="text"
+                        value={ThicknessD}
+                        onChange={(e) => setD(e.target.value)}
+                    />
+                </label>
+                <br />
+                <label>
+                    String G Thickness:
+                    <input
+                        type="text"
+                        value={ThicknessG}
+                        onChange={(e) => setG(e.target.value)}
+                    />
+                </label>
+                <br />
+                <label>
+                    String B Thickness:
+                    <input
+                        type="text"
+                        value={ThicknessB}
+                        onChange={(e) => setB(e.target.value)}
+                    />
+                </label>
+                <br />
+                <label>
+                    String e Thickness:
+                    <input
+                        type="text"
+                        value={Thicknesse}
+                        onChange={(e) => sete(e.target.value)}
                     />
                 </label>
                 <br />

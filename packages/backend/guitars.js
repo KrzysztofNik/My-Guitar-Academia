@@ -11,7 +11,6 @@ const parseValue = (value) => {
 };
 
 const addGuitar = async (req, res) => {
-
     const { user } = await getUser(req, res, () => { });
 
     if (!user) {
@@ -57,6 +56,26 @@ const showGuitars = async (req, res) => {
     } catch (error) {
         console.error('B³¹d przy wyci¹ganiu gitar', error)
         return res.status(500).json({ error: 'Wyst¹pi³ b³¹d podczas wyci¹gania gitar z bazy danych' })
+    }
+
+}
+
+
+const deleteGuitar = async (req, res) => {
+    const { user } = await getUser(req, res, () => { });
+
+    if (!user) {
+        return res.status(401).json({ error: 'U¿ytkownik niezalogowany' });
+    }
+
+    try {
+        const guitarId = req.params.guitarId;
+        await Guitar.query().deleteById(guitarId);
+        return res.status(200).json({ message: 'Pomyœlne usuniêto gitare' });
+    }
+    catch (error) {
+        console.error('B³¹d przy usuwaniu gitary z bazy danych', error)
+        return res.status(500).json({ error: 'Wyst¹pi³ b³¹d podczas usuwania gitary' })
     }
 
 }
@@ -111,4 +130,4 @@ const editGuitar = async (req, res) => {
 }
 
 
-module.exports = { addGuitar, showGuitars, editGuitar }
+module.exports = { addGuitar, showGuitars, editGuitar, deleteGuitar }

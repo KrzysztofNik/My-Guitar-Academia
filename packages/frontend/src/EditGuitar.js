@@ -147,7 +147,9 @@ function GuitarEditForm() {
                 <label>
                     Price:
                     <input
-                        type="text"
+                        type="number"
+                        min='0'
+                        step='0.01'
                         value={price}
                         onChange={(e) => setprice(e.target.value)}
                     />

@@ -2,10 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\packages",
-    "\\packages\\backend",
     "\\packages\\frontend",
     "\\packages\\frontend\\src"
   ],
-  "SelectedNode": "\\packages\\frontend\\src\\GuitarDetail.js",
+  "SelectedNode": "\\packages\\backend",
   "PreviewInSolutionExplorer": false
 }

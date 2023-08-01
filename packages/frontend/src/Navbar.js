@@ -40,7 +40,8 @@ function Navbar() {
             <ul className="nav-links">
                 {isLoggedIn ? (
                     <>
-                        <li><button className='logout' onClick={handleLogout}>Logout</button></li>
+                        <button className='logout' onClick={handleLogout}>Logout</button>
+                        <li><Link to='/guitar/add'>Dodaj gitare</Link></li>
                     </>
                 ) : (
                     <>
@@ -48,9 +49,6 @@ function Navbar() {
                         <li><Link to='/auth/register'>Register</Link></li>
                     </>
                 )}
-                {isLoggedIn &&
-                    <li><Link to='/guitar/add'>Dodaj gitare</Link></li>
-                }
             </ul>
         </nav>
     );

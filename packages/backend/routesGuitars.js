@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { addGuitar, showGuitars, editGuitar } = require('./guitars')
+const { addGuitar, showGuitars, editGuitar, deleteGuitar } = require('./guitars')
 const Guitar = require('./models/Guitars')
 
 router.post('/add', addGuitar)
 router.get('/show', showGuitars)
 router.put('/:ownerId/:guitarId/edit', editGuitar)
+router.get('/:ownerId/:guitarId/delete', deleteGuitar)
 router.get('/image/:id', async (req, res) => {
     try {
         const guitarId = req.params.id;
